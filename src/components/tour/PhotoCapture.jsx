@@ -1,6 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { Camera, Image } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { useTour } from '@/lib/tourContext';
 
 export default function PhotoCapture({ stationId, onPhotoAdded, photoCount }) {
@@ -13,68 +11,44 @@ export default function PhotoCapture({ stationId, onPhotoAdded, photoCount }) {
     const files = Array.from(e.target.files);
     if (!files.length) return;
     setUploading(true);
-
     files.forEach(file => {
       const reader = new FileReader();
       reader.onload = (ev) => {
-        const dataUrl = ev.target.result;
-        addPhoto(stationId, dataUrl);
-        if (onPhotoAdded) onPhotoAdded(dataUrl);
+        addPhoto(stationId, ev.target.result);
+        if (onPhotoAdded) onPhotoAdded(ev.target.result);
       };
       reader.readAsDataURL(file);
     });
-
     setTimeout(() => setUploading(false), 500);
     e.target.value = '';
   };
 
   return (
-    <div className="flex flex-col items-center gap-2 w-full">
-      {/* קלט מצלמה */}
-      <input
-        ref={cameraRef}
-        type="file"
-        accept="image/*"
-        capture="environment"
-        multiple
-        onChange={handleFiles}
-        className="hidden"
-      />
-      {/* קלט גלריה */}
-      <input
-        ref={galleryRef}
-        type="file"
-        accept="image/*"
-        multiple
-        onChange={handleFiles}
-        className="hidden"
-      />
+    <div className="flex flex-col items-center gap-3 w-full">
+      <input ref={cameraRef} type="file" accept="image/*" capture="environment" multiple onChange={handleFiles} className="hidden" />
+      <input ref={galleryRef} type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
 
-      <div className="flex gap-2 w-full">
-        <Button
-          size="lg"
+      <div className="flex gap-3 w-full">
+        <button
           onClick={() => cameraRef.current?.click()}
           disabled={uploading}
-          className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full py-5 text-base font-bold shadow-lg gap-2 flex-1"
+          className="flex-1 flex items-center justify-center gap-2 bg-white text-gray-800 font-bold text-base rounded-2xl py-4 shadow-md border border-gray-200 active:scale-95 transition-transform disabled:opacity-50"
         >
-          <Camera className="w-5 h-5" />
-          צלם 📸
-        </Button>
+          📷 צלם
+        </button>
 
-        <Button
-          size="lg"
+        <button
           onClick={() => galleryRef.current?.click()}
           disabled={uploading}
-          className="bg-white hover:bg-white/90 text-foreground border-2 border-primary/30 rounded-full py-5 text-base font-bold shadow-lg gap-2 flex-1"
+          className="flex-1 flex items-center justify-center gap-2 bg-white text-gray-800 font-bold text-base rounded-2xl py-4 shadow-md border border-gray-200 active:scale-95 transition-transform disabled:opacity-50"
         >
-          <Image className="w-5 h-5" />
-          גלריה 🖼️
-        </Button>
+          🖼️ גלריה
+        </button>
       </div>
 
       {photoCount > 0 && (
         <p className="text-xs text-muted-foreground">
-          {photoCount} תמונות — אפשר להוסיף עוד! ✨
+          {photoCount} תמונות — אפשר להוסיף עוד ✨
         </p>
       )}
     </div>

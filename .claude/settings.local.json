@@ -8,7 +8,8 @@
       "Bash(gh auth:*)"
     ],
     "additionalDirectories": [
-      "c:\\Users\\shellyle\\Downloads\\your-story-tour\\food-tour-app-v2\\src\\components\\tour"
+      "c:\\Users\\shellyle\\Downloads\\your-story-tour\\food-tour-app-v2\\src\\components\\tour",
+      "c:\\Users\\shellyle\\Downloads\\your-story-tour\\food-tour-app-v3\\src\\components\\tour"
     ]
   }
 }
