@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Share2, Download, Image } from 'lucide-react';
 import { useTour } from '@/lib/tourContext';
@@ -280,14 +281,14 @@ export default function Finale() {
             transition={{ delay: 0.3 }}
             className="max-w-sm w-full"
           >
-            <a href="/still-hungry">
+            <Link to="/still-hungry">
               <Button
                 size="lg"
                 className="bg-white/85 hover:bg-white text-foreground border border-white/50 rounded-full w-full py-5 text-base font-bold shadow-lg"
               >
                 עוד קצת רעבים? 🍽️
               </Button>
-            </a>
+            </Link>
           </motion.div>
         )}
 
